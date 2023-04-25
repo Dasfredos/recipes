@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>User with Recipes</title>
+</head>
+
+<body>
+    
+    <div class="col-7  mx-auto my-5">
+        <h1>Welcome, {{listed_user.first_name}}</h1>
+        <input type="hidden" name="user_id" value="{{listed_user.id}}">
+        <div class="d-flex justify-content-between">
+            <h3>All posted recipes:</h3>
+            <div>
+                <a href='/new_recipe' class="px-3">+ Create</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <table class="table table-dark ">
+            <thead class="text-light table-dark">
+                
+                <th>Recipe Name</th>
+                <th>Under</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+
+            </thead>
+            <tbody>
+                {% for recipe in all_posts %}
+                    <tr>
+                        <td>{{recipe.name}}</td>
+
+                        <td>{% if recipe.under_time == 1 %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif%}</td>
+
+                        <td>{{recipe.creator.first_name}}</td>
+
+                        <td> <a href='/show_recipe/{{recipe.id}}'>View recipe</a>  {% if recipe.user_id == session['user_id'] %} | <a href='/edit/recipe/{{recipe.id}}'>Edit</a> | <a href='/recipe/delete/{{recipe.id}}'>Delete</a>  </td> 
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

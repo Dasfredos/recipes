@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Your description goes here">
+<meta name="keywords" content="one, two, three">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<title>View Recipe</title>
+
+</head>
+	
+<body>
+
+<div class="bg-light text-danger p-9 rounded col-9 mx-auto mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-danger">Welcome {{recipe.creator.first_name}}</h1>
+        <div>
+            <a href="/user/account/{{listed_user.id}}" class=" text-info px-3">Back to Recipes</a>
+            <a href="/logout" class=" text-info">Logout</a>
+        </div>
+            
+    </div><br>
+    <div class="d-flex justify-content-between align-items-center">
+        <h3>{{recipe.name}}</h3>
+        <span>Posted by: {{recipe.creator.first_name}}</span>    
+    </div>
+
+    <div class="border border-dark p-4">
+        <div>
+            <p>Description: {{recipe.description}}</p>
+        </div><br>
+
+        <div>
+            <p>Under 30 minutes?: {% if recipe.under_time == 1 %}
+                Yes
+                {% else %}
+                No
+                {% endif%}</p>
+        </div><br>
+
+        <div>
+            <p>Instructions: {{recipe.instructions}}</p>
+        </div><br>
+
+        <div>
+            <p>Date Made: {{recipe.created_at.strftime("%B %d, %Y ")}}</p>
+        </div><br>
+
+    </div>
+        
+    
+</div>
+
+
+
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>        

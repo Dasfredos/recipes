@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Your description goes here">
+    <meta name="keywords" content="one, two, three">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<title>Add a New Recipe</title>
+
+	</head>
+	
+	<body class="container bg-light">
+        <header class="d-flex m-2">
+            <div class="col-6">
+                <h2 class="text-info mt-3">Add a New Recipe!</h2>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3 pt-4">
+                <a href="/user/account/{{user.id}}" class="px-3">Back to Recipes</a> 
+                <a href="/logout">Logout</a> 
+            </div>
+        </header>
+        <div class="w-25 alert align-items-center" role="alert">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="form-control is-invalid text-danger text-strong">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="d-flex row">
+            <div class="w-75">
+                <form class="" action="/create_recipe" method="POST">
+                    <input type="hidden" name="user_id" value = "{{user.id}}">
+                <div class="form-group row mt-2">
+                <label for="name" class="col-sm-2 col-form-label">Recipe Name</label>
+                    <div class="col-sm-10">
+                        <input type="name" class="form-control" id="name" placeholder="Recipe Name" name= "name" >
+                    </div>
+                </div>
+                <div class="form-group row mt-2">
+                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" id="description" placeholder="description" name= "description" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row mt-2">
+                <label for="instructions" class="col-sm-2 col-form-label">Instructions</label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" id="instructions" placeholder="Instructions" name= "instructions"  rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="w-25">
+                <div class="m-2">
+                    <label for="created_at">Date Cooked/Made:</label>
+                    <input type="date" id="created_at" name="created_at">
+                </div>
+                <div class="m-2 mt-3">
+                    <label for="under_30">Under 30 minutes?</label><br>
+                    <input type="radio" id="under_time_yes" name="under_30" value="1">
+                    <label for="under_time_yes">Yes</label>
+                    <input type="radio" id="under_time_no" name="under_30" value="0">
+                    <label for="under_time_no">No</label><br>
+                </div>
+                <button type="submit" class="btn btn-outline-info m-1">Submit</button>
+            </form>
+            </div>
+        </div>
+    </body>
+</html>
